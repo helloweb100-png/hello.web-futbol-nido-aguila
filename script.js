@@ -594,22 +594,26 @@
       cta.removeAttribute('aria-disabled'); cta.tabIndex = 0;
 
       if (ok) {
-        var age = thisYear - parseInt(val, 10);
-        el.title.textContent = '¡Tu peque califica en Aguilitas!';
-        el.sub.textContent = 'Los nacidos en ' + val + ' forman parte de la categoría. Elige su turno y apártale su lugar.';
-        el.cat.textContent = 'Aguilitas';
+        var yr = parseInt(val, 10);
+        var age = thisYear - yr;
+        var aguilita = yr >= 2018;
+        el.title.textContent = aguilita ? '¡Tu peque califica en Aguilitas!' : '¡Tu peque tiene su categoría en el Nido!';
+        el.sub.textContent = aguilita
+          ? 'Los nacidos en ' + val + ' forman parte de la categoría. Elige su turno y apártale su lugar.'
+          : 'Para los nacidos en ' + val + ' tenemos la categoría ' + val + '. Elige su turno y apártale su lugar.';
+        el.cat.textContent = aguilita ? 'Aguilitas' : 'Categoría ' + val;
         el.year.textContent = val;
         el.age.textContent = (age - 1) + '–' + age + ' años';
-        el.code.textContent = 'AG · ' + val + ' · ✓';
+        el.code.textContent = (aguilita ? 'AG' : 'NA') + ' · ' + val + ' · ✓';
         ctaTxt.textContent = '¡Apártale su lugar!';
-        cta.href = waLink('¡Hola! Mi peque nació en ' + val + ' y quiero apartarle su lugar en la categoría Aguilitas de Nido Águila Valle de Chalco. ¿Me comparten informes?');
+        cta.href = waLink('¡Hola! Mi peque nació en ' + val + ' y quiero apartarle su lugar en la categoría ' + (aguilita ? 'Aguilitas' : val) + ' de Nido Águila Valle de Chalco. ¿Me comparten informes?');
       } else {
         el.title.textContent = 'Cuéntanos su año y te orientamos.';
         el.sub.textContent = 'Escríbenos y te decimos qué categoría le corresponde a tu peque.';
         el.cat.textContent = 'Por confirmar';
         el.year.textContent = 'Otro año';
         el.age.textContent = '—';
-        el.code.textContent = 'AG · ? · ?';
+        el.code.textContent = 'NA · ? · ?';
         ctaTxt.textContent = 'Consultar su categoría';
         cta.href = waLink('¡Hola! Mi peque nació en otro año y quiero saber qué categoría le corresponde en Nido Águila Valle de Chalco.');
       }
@@ -947,7 +951,9 @@
         return;
       }
       var d = r.data;
-      var text = '¡Hola! Quiero inscribir a mi peque en Nido Águila Valle de Chalco (categoría Aguilitas).\n\n' +
+      var yr = parseInt(d.year, 10);
+      var catTxt = isNaN(yr) ? '' : (yr >= 2018 ? ' (categoría Aguilitas)' : ' (categoría ' + yr + ')');
+      var text = '¡Hola! Quiero inscribir a mi peque en Nido Águila Valle de Chalco' + catTxt + '.\n\n' +
         '• Papá/mamá/tutor: ' + d.tutor + '\n' +
         '• Nombre del peque: ' + d.peque + '\n' +
         '• Año de nacimiento: ' + d.year + '\n' +
