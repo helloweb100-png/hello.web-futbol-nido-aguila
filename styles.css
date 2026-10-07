@@ -390,7 +390,7 @@ body::after {
 
 .hero__cycle { margin-top: 22px; font-size: clamp(1.05rem, 3vw + .5rem, 1.5rem); font-weight: 600; color: rgba(255, 255, 255, .88); }
 .cycle { display: inline-block; font-family: var(--font-display); font-weight: 700; color: var(--gold); will-change: transform, opacity; }
-.hero__lead { margin-top: 16px; max-width: 52ch; font-size: clamp(1rem, 1.5vw + .6rem, 1.15rem); line-height: 1.7; color: var(--muted); }
+.hero__lead { margin-top: 16px; max-width: 52ch; font-size: clamp(1rem, 1.5vw + .6rem, 1.15rem); line-height: 1.7; color: var(--muted); text-transform: uppercase; }
 .hero__lead strong { color: #fff; }
 .hero__cta { display: grid; gap: 12px; margin-top: 30px; }
 .hero__note { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 18px; font-size: 13px; color: var(--muted); }
